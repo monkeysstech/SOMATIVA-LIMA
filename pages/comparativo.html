@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monkeys Tech - Comparativo de Preços</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/comparativo.css">
+</head>
+
+<body>
+    <div class="container-principal">
+        <header>
+            <div class="grupo-logo">
+                <img src="../img/icon.png" alt="Logo Monkeys" />
+                <span class="logo">Monkeys Tech</span>
+            </div>
+            <nav>
+                <a href="../pages/home.html">Produtos</a>
+                <a class="ativo" href="#">Comparativo</a>
+                <a href="suporte.html">Suporte Tec.</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Left Column -->
+            <aside class="painel-selecao">
+                <div class="cabecalho-painel">
+                    <h2>Categorias</h2>
+                </div>
+                <ul class="lista-categorias" id="categoryList">
+                    <!-- Categories will be populated by JS -->
+                </ul>
+            </aside>
+
+            <!-- Right Column -->
+            <section class="painel-comparacao">
+                <div id="emptyState" class="estado-vazio">
+                    <h3>Selecione um produto</h3>
+                    <p>Escolha um item no menu lateral para ver o comparativo de preços em tempo real.</p>
+                </div>
+
+                <div id="productDetail" class="detalhe-produto">
+                    <div class="cabecalho-produto">
+                        <h2 id="detailName">Nome do Produto</h2>
+                        <p id="detailDesc">Descrição do produto...</p>
+                    </div>
+
+                    <div class="grade-precos" id="priceGrid">
+                        <!-- Prices will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            // Product Data
+            const catalog = [
+                {
+                    category: "PCs Gamer",
+                    items: [
+                        { name: 'PC Gamer de Entrada "Moba & FPS"', desc: 'Processador AMD Ryzen 5 5600G (Vídeo Integrado), 16GB RAM (2x8GB), SSD 480GB, Fonte 500W.', basePrice: 2800 },
+                        { name: 'PC Gamer Intermediário "Full HD Ultra"', desc: 'Processador Intel Core i5-12400F, Placa de Vídeo RTX 4060 8GB, 16GB RAM, SSD NVMe 1TB.', basePrice: 4500 },
+                        { name: 'PC Gamer Performance "Quad HD"', desc: 'Processador AMD Ryzen 7 5700X3D, Placa de Vídeo RTX 4070 Super 12GB, 32GB RAM, Water Cooler 240mm.', basePrice: 7200 },
+                        { name: 'PC Gamer Streamer/Pro', desc: 'Processador Intel Core i7-14700K, Placa de Vídeo RTX 4080 Super, 32GB DDR5, SSD NVMe 2TB Gen4.', basePrice: 12500 }
+                    ]
+                },
+                {
+                    category: "Teclados",
+                    items: [
+                        { name: 'Redragon Kumara K552 (Mecânico TKL)', desc: 'O "rei do custo-benefício", compacto, com iluminação RGB e switches removíveis (Blue ou Red).', basePrice: 220 },
+                        { name: 'HyperX Alloy Origins Core', desc: 'Teclado mecânico robusto com corpo em alumínio aeronáutico e switches proprietários HyperX.', basePrice: 550 },
+                        { name: 'Logitech G213 Prodigy (Membrana)', desc: 'Ideal para quem quer silêncio e resistência a respingos, mas com teclas de mídia dedicadas e RGB.', basePrice: 300 },
+                        { name: 'Razer Huntsman Mini (Óptico 60%)', desc: 'Para jogadores competitivos que precisam de máximo espaço no mousepad e acionamento instantâneo via luz.', basePrice: 800 }
+                    ]
+                },
+                {
+                    category: "Mouses",
+                    items: [
+                        { name: 'Logitech G203 Lightsync', desc: 'O melhor modelo de entrada, sensor confiável, design clássico e iluminação RGB personalizável.', basePrice: 150 },
+                        { name: 'Redragon Cobra M711', desc: 'Opção ergonômica muito popular, com botões laterais e DPI ajustável até 10.000.', basePrice: 130 },
+                        { name: 'Logitech G305 Lightspeed (Sem Fio)', desc: 'Tecnologia wireless sem latência, alimentado por pilha AA com duração de meses.', basePrice: 280 },
+                        { name: 'Razer DeathAdder V3 (Wired/Pro)', desc: 'Formato ergonômico icônico, ultra leve (59g) e switches ópticos de 3ª geração para esports.', basePrice: 450 }
+                    ]
+                },
+                {
+                    category: "Fones e Caixas de Som",
+                    items: [
+                        { name: 'Headset HyperX Cloud Stinger 2', desc: 'Leve, com espuma de memória (memory foam) e microfone com cancelamento de ruído passivo.', basePrice: 250 },
+                        { name: 'Headset Logitech G733 K/DA (Sem Fio)', desc: 'Design moderno, muito leve, iluminação frontal e bateria de longa duração.', basePrice: 850 },
+                        { name: 'Caixa de Som Redragon Anvil GS520', desc: 'Design compacto para mesas, estéreo 2.0 com iluminação RGB controlável.', basePrice: 120 },
+                        { name: 'Monitor de Áudio Edifier R1280T', desc: 'Para quem prefere caixas de som de alta fidelidade (madeira) ao invés de headset, ideal para jogos imersivos e música.', basePrice: 600 }
+                    ]
+                }
+            ];
+
+            const competitors = ["KaBuM!", "TeraByte", "Pichau", "Amazon", "Mercado Livre"];
+
+            // Initialization
+            const categoryList = document.getElementById('categoryList');
+            const emptyState = document.getElementById('emptyState');
+            const productDetail = document.getElementById('productDetail');
+            const detailName = document.getElementById('detailName');
+            const detailDesc = document.getElementById('detailDesc');
+            const priceGrid = document.getElementById('priceGrid');
+
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            }
+
+            function renderCategories() {
+                catalog.forEach((cat, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'item-categoria';
+
+                    const btn = document.createElement('button');
+                    btn.className = 'botao-categoria';
+                    btn.textContent = cat.category;
+                    btn.onclick = () => toggleCategory(li);
+
+                    const ul = document.createElement('ul');
+                    ul.className = 'lista-produtos';
+
+                    cat.items.forEach(item => {
+                        const itemLi = document.createElement('li');
+                        const itemBtn = document.createElement('button');
+                        itemBtn.className = 'botao-produto-lista';
+                        itemBtn.textContent = item.name;
+                        itemBtn.onclick = (e) => {
+                            e.stopPropagation(); // Prevent category toggle
+                            selectProduct(item, itemBtn);
+                        };
+                        itemLi.appendChild(itemBtn);
+                        ul.appendChild(itemLi);
+                    });
+
+                    li.appendChild(btn);
+                    li.appendChild(ul);
+                    categoryList.appendChild(li);
+                });
+            }
+
+            function toggleCategory(li) {
+                // Close others
+                document.querySelectorAll('.item-categoria').forEach(item => {
+                    if (item !== li) item.classList.remove('ativo');
+                });
+                li.classList.toggle('ativo');
+            }
+
+            function selectProduct(product, btn) {
+                // Highlight active button
+                document.querySelectorAll('.botao-produto-lista').forEach(b => b.classList.remove('ativo'));
+                btn.classList.add('ativo');
+
+                // Show detail panel
+                emptyState.style.display = 'none';
+                productDetail.style.display = 'block';
+
+                // Populate Info
+                detailName.textContent = product.name;
+                detailDesc.textContent = product.desc;
+
+                // Generate Comparisons
+                renderComparison(product.basePrice);
+            }
+
+            function renderComparison(basePrice) {
+                priceGrid.innerHTML = '';
+
+                // 1. Render Our Store Card
+                const ourCard = document.createElement('div');
+                ourCard.className = 'card-preco nossa-loja';
+                ourCard.innerHTML = `
+                <div>
+                    <span class="nome-loja">Monkeys Tech <span class="selo-loja">Você está aqui</span></span>
+                    <div class="valor-preco">${formatCurrency(basePrice)}</div>
+                </div>
+                <div style="text-align: right; color: var(--neon-green); font-size: 0.9rem;">
+                    <span style="display:block;">✓ Garantia Exclusiva de 3 Anos</span>
+                    <span style="display:block;">✓ Frete Grátis</span>
+                </div>
+            `;
+                priceGrid.appendChild(ourCard);
+
+                // 2. Render Competitors
+                competitors.forEach(comp => {
+                    // Logic: 20% chance of being cheaper
+                    const isCheaper = Math.random() < 0.2;
+                    let compPrice;
+
+                    if (isCheaper) {
+                        // 5% to 15% cheaper
+                        const discount = 0.05 + Math.random() * 0.10;
+                        compPrice = basePrice * (1 - discount);
+                    } else {
+                        // 5% to 25% expensive
+                        const markup = 0.05 + Math.random() * 0.20;
+                        compPrice = basePrice * (1 + markup);
+                    }
+
+                    const diffPercent = Math.abs(((compPrice - basePrice) / basePrice) * 100).toFixed(0);
+
+                    const card = document.createElement('div');
+                    card.className = 'card-preco card-concorrente';
+
+                    let diffHTML = '';
+                    let warningHTML = '';
+
+                    if (isCheaper) {
+                        diffHTML = `<div class="diferenca-preco diff-barato">R$ ${formatCurrency(basePrice - compPrice)} mais barato</div>`;
+                        warningHTML = `
+                        <div class="selo-aviso">
+                            <span class="icone-aviso">⚠️</span>
+                            <span>Atenção: Este concorrente não oferece a Garantia Exclusiva de 3 Anos inclusa em nossos produtos.</span>
+                        </div>
+                    `;
+                    } else {
+                        diffHTML = `<div class="diferenca-preco diff-caro">${diffPercent}% mais caro</div>`;
+                    }
+
+                    card.innerHTML = `
+                    <div>
+                        <span class="nome-loja">${comp}</span>
+                        <div class="valor-preco">${formatCurrency(compPrice)}</div>
+                        ${diffHTML}
+                    </div>
+                    ${warningHTML}
+                `;
+
+                    priceGrid.appendChild(card);
+                });
+            }
+
+            // Init
+            renderCategories();
+
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monkeys Tech - Suporte Técnico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../Styles/home.css">
+    <link rel="stylesheet" href="../Styles/suporte.css">
+    <link rel="shortcut icon" href="../assets/img/icon.svg" type="image/x-icon" />
+</head>
+
+<body>
+    <div class="container-principal">
+        <header>
+            <div class="grupo-logo">
+                <img src="../img/icon.png" alt="Logo Monkeys" />
+                <span class="logo">Monkeys Tech</span>
+            </div>
+            <nav>
+                <a href="home.html">Produtos</a>
+                <a href="comparativo.html">Comparativo</a>
+                <a class="ativo" href="suporte.html">Suporte Tec.</a>
+            </nav>
+        </header>
+    </div>
+
+    <div class="container-suporte">
+        <h1>Suporte Técnico</h1>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Preencha o formulário abaixo para entrar em contato
+            com nossa equipe.</p>
+
+        <form class="formulario-suporte">
+            <div class="grupo-formulario">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="assunto">Assunto</label>
+                <select id="assunto" name="assunto">
+                    <option value="duvida">Dúvida sobre produto</option>
+                    <option value="troca">Troca ou Devolução</option>
+                    <option value="defeito">Relatar defeito</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="botao-enviar">Enviar Solicitação</button>
+        </form>
+    </div>
+</body>
+
+</html>

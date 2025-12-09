@@ -1,0 +1,74 @@
+.container-suporte {
+    width: min(800px, 90%);
+    margin: 4rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container-suporte h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(201, 8, 255, 0.5);
+}
+
+.formulario-suporte {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.grupo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.grupo-formulario label {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.grupo-formulario input,
+.grupo-formulario textarea,
+.grupo-formulario select {
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario textarea:focus,
+.grupo-formulario select:focus {
+    outline: none;
+    border-color: var(--purple);
+}
+
+.botao-enviar {
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, var(--purple), var(--purple-strong));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    box-shadow: 0 4px 15px rgba(89, 0, 157, 0.4);
+}
+
+.botao-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 8, 255, 0.6);
+    filter: brightness(1.1);
+}

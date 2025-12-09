@@ -1,0 +1,153 @@
+:root {
+    color-scheme: dark;
+    --purple: #59009d;
+    --purple-strong: #c908ff;
+    --glass: rgba(6, 1, 15, 0.82);
+    --divider: rgba(255, 255, 255, 0.18);
+    --border: rgba(255, 255, 255, 0.12);
+    --text-muted: rgba(252, 243, 255, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    min-height: 80vh;
+    background:
+        radial-gradient(circle at center, rgba(89, 0, 157, 0.5), transparent 40%),
+        radial-gradient(circle at top left, rgba(89, 0, 157, 0.4), transparent 55%),
+        radial-gradient(circle at top right, rgba(89, 0, 157, 0.4), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(89, 0, 157, 0.4), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(89, 0, 157, 0.4), transparent 55%),
+        linear-gradient(145deg, #08000f, #010001 65%, #030104);
+    color: #f7f0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-direction: column;
+}
+
+body>img {
+    height: auto;
+    filter: drop-shadow(0 6px 12px rgba(89, 0, 157, 0.45));
+    width: 120px;
+}
+
+aside,
+#registerForm {
+    padding: 2.5rem;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: min(400px, 90%);
+}
+
+aside h2 {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input,
+button[type="submit"],
+aside>a,
+body>a {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+input:focus {
+    border-color: var(--purple);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+button[type="submit"] {
+    background: var(--purple);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+aside>a,
+body>a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+aside>a {
+    display: inline-block;
+    text-align: center;
+    padding: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: background 0.2s, color 0.2s;
+}
+
+aside>a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+body>a {
+    margin-top: 1rem;
+}
+
+body>a:hover {
+    color: #fff;
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #e0c0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

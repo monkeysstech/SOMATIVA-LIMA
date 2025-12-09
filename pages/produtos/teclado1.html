@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Styles/produto.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <title>MONKEYS TECH - Teclado 1</title>
+</head>
+
+<body>
+    <div class="container-principal grade-produto">
+        <header class="cabecalho-grade">
+            <div class="grupo-logo">
+                <img src="../../img/logo.png" alt="Logo Monkeys" />
+                <span class="logo">Monkeys Tech</span>
+            </div>
+            <nav>
+                <a class="ativo" href="../../pages/home.html">Produtos</a>
+                <a href="../../pages/comparativo.html">Comparativo</a>
+                <a href="../suporte.html">Suporte Tec.</a>
+            </nav>
+            <div class="acoes">
+                <button class="carrinho">🛒</button>
+            </div>
+        </header>
+
+        <div class="area-imagem-principal">
+            <img id="main-image" src="../../img/keyboard01.png" alt="Produto Principal">
+        </div>
+
+        <div class="area-detalhes">
+            <h2>Redragon Kumara K552</h2>
+            <p>O "rei do custo-benefício", compacto, com iluminação RGB e switches removíveis (Blue ou Red). Perfeito
+                para setups minimalistas e gamers que buscam performance.</p>
+        </div>
+
+        <div class="area-miniaturas miniaturas">
+            <img src="../../img/keyboard01.png" alt="Thumb 1" width="130px" height="130px">
+            <img src="../../img/keyboard02.png" alt="Thumb 2" width="130px" height="130px">
+            <img src="../../img/keyboard01.png" alt="Thumb 3" width="130px" height="130px">
+        </div>
+
+        <div class="area-botao">
+            <button class="botao-adicionar-carrinho">ADD AO CARRINHO</button>
+        </div>
+    </div>
+
+    <div id="lightbox">
+        <span id="botao-fechar">&times;</span>
+        <img id="lightbox-img">
+    </div>
+
+    <script>
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const closeBtn = document.getElementById("botao-fechar");
+        // Select main image and thumbnails
+        const images = document.querySelectorAll(".area-imagem-principal img, .miniaturas img");
+
+        images.forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+            });
+        });
+
+        // Close when clicking the X button
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+        });
+
+        // Close when clicking outside the image
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+
+</html>
